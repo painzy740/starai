@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#8b5cf6">
+  <title>Staries AI - Asisten Cerdas Serbaguna</title>
+  <meta name="description" content="Staries AI adalah asisten AI cerdas untuk kebutuhan chat, analisis gambar, dan hiburan. Dibangun dengan teknologi terbaru untuk membantu kamu setiap hari.">
+  <meta name="keywords" content="Staries AI, AI Chatbot, Vision AI, Generative AI, Painzy, AI Indonesia">
+  <meta name="author" content="Painzy">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Staries AI - Asisten Cerdas Serbaguna">
+  <meta property="og:description" content="Gunakan Staries AI untuk chatting, analisis gambar, dan hiburan. Cerdas, cepat, dan menyenangkan.">
+  <meta property="og:image" content="https://files.catbox.moe/b27vj3.jpg">
+  <meta property="og:url" content="https://staries.painzy.web.id/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Staries AI - Asisten Cerdas Serbaguna">
+  <meta name="twitter:description" content="Coba Staries AI sekarang! Chatting, analisis gambar, dan fitur seru lainnya.">
+  <meta name="twitter:image" content="https://files.catbox.moe/b27vj3.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://files.catbox.moe/b27vj3.jpg" type="image/jpeg">
+  <style>
+    :root {
+      --font-main: "Poppins", sans-serif;
+      --primary-color: #8b5cf6;
+      --primary-color-hover: #7c3aed;
+      --text-color: #f3f4f6;
+      --text-color-muted: #9ca3af;
+      --bg-color: #0a0e17;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --border-color: #374151;
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Particles Canvas */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      max-width: 90%;
+      width: 500px;
+    }
+
+    /* Logo */
+    .logo-container {
+      margin-bottom: 2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 30px;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    /* Title */
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--primary-color), #10b981);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #10b981;
+      letter-spacing: 0.5px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-color-muted);
+      margin-bottom: 2.5rem;
+      max-width: 80%;
+    }
+
+    /* Card */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px var(--shadow-color);
+      animation: fadeIn 1s ease-out;
+    }
+
+    /* Start Chat Button */
+    .start-chat-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .start-chat-btn:hover {
+      background-color: var(--primary-color-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+    }
+
+    .start-chat-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      padding: 0.5rem;
+    }
+
+    .feature-icon {
+      background-color: rgba(139, 92, 246, 0.2);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--primary-color);
+    }
+
+    .feature-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-desc {
+      font-size: 0.8rem;
+      color: var(--text-color-muted);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-color-muted);
+    }
+
+    .footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: var(--primary-color-hover);
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Typing Animation for Tagline */
+    .typing-animation {
+      border-right: 3px solid #10b981;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #10b981 }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+      }
+
+      .title {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1.1rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .features {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .feature {
+        flex-direction: row;
+        text-align: left;
+        gap: 1rem;
+      }
+
+      .feature-icon {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .title {
+        font-size: 1.75rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://files.catbox.moe/b27vj3.jpg" alt="Staries AI Logo" class="logo">
+    </div>
+    
+    <h1 class="title">Staries AI</h1>
+    <h2 class="tagline typing-animation">Masa depan AI dimulai dari sini</h2>
+    <p class="subtitle">Asisten AI cerdas untuk kebutuhan chat, analisis gambar, dan hiburan</p>
+    
+    <div class="card">
+      <button class="start-chat-btn" onclick="window.location.href='chat.html'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Mulai Chat
+      </button>
+      
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Chat AI</h3>
+            <p class="feature-desc">Tanya apa saja</p>
+          </div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Analisis Gambar</h3>
+            <p class="feature-desc">Unggah & analisis</p>
+          </div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Tools</h3>
+            <p class="feature-desc">Berbagai fitur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Dibuat oleh <a href="https://t.me/painzyfvck" target="_blank">Painzy</a> &copy; 2025</p>
+    </div>
+  </div>
+
+  <!-- Particles.js Library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <!-- Particles Configuration -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 100,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#8b5cf6"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            }
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 2,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#8b5cf6",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": true,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 1
+              }
+            },
+            "bubble": {
+              "distance": 400,
+              "size": 40,
+              "duration": 2,
+              "opacity": 8,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 200,
+              "duration": 0.4
+            },
+            "push": {
+              "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
+            }
+          }
+        },
+        "retina_detect": true
+      });
+    });
+  </script>
+</body>
+</html>
